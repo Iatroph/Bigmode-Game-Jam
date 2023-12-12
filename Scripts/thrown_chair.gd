@@ -4,6 +4,7 @@ var normal
 var pos
 var correct_rot
 @onready var chair = preload("res://Scenes/bounce_chair.tscn")
+@onready var sprite = $Sprite2D
 
 func _integrate_forces(state : PhysicsDirectBodyState2D) -> void:
 	if(state.get_contact_count() > 0):
@@ -15,6 +16,8 @@ func _integrate_forces(state : PhysicsDirectBodyState2D) -> void:
 		correct_rot = Vector2.UP.angle_to(normal)
 		
 
+func _process(delta):
+	sprite.rotation_degrees += 5
 
 func _on_body_entered(body):
 	if body.name == "TileMap":

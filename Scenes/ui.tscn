@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgyifk1ved1df"]
+[gd_scene load_steps=4 format=3 uid="uid://cgyifk1ved1df"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_okcmr"]
 [ext_resource type="Texture2D" uid="uid://c3555vruucikh" path="res://Art/Crosshair.png" id="1_pawvl"]
+[ext_resource type="Texture2D" uid="uid://dmf1x4kfcxmap" path="res://Art/Progress.png" id="3_xac1a"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -13,5 +14,38 @@ grow_vertical = 2
 script = ExtResource("1_okcmr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 5
 scale = Vector2(2, 2)
 texture = ExtResource("1_pawvl")
+
+[node name="Control" type="Control" parent="Sprite2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.035, 0.035)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Sprite2D/Control"]
+z_index = 5
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = -148.0
+offset_right = 108.0
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(128, 128)
+min_value = 100.0
+max_value = 500.0
+value = 100.0
+fill_mode = 4
+texture_under = ExtResource("3_xac1a")
+texture_progress = ExtResource("3_xac1a")
+tint_under = Color(0.137255, 0.137255, 0.137255, 0.717647)
+tint_progress = Color(1, 0.0588235, 0.0745098, 1)

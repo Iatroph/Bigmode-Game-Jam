@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsgp7p5o3sfao"]
+
+[ext_resource type="Texture2D" uid="uid://u2m5j6js2tv2" path="res://Art/Folded Chair.png" id="1_qpwgj"]
+[ext_resource type="Script" path="res://Scripts/projectile_chair.gd" id="1_xsxkn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0anu2"]
+radius = 5.09902
+
+[node name="Projectile_Chair" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_xsxkn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_qpwgj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0anu2")

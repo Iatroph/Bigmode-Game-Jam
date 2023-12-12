@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c3lirk3e6a41q"]
 
 [ext_resource type="Script" path="res://Scripts/bounce_chair.gd" id="1_myr7t"]
-[ext_resource type="Texture2D" uid="uid://duugsuhdoxr1l" path="res://Art/Deck Chair.png" id="2_ogc3x"]
+[ext_resource type="Texture2D" uid="uid://dks7jdakwscnw" path="res://Art/Smaller Chair.png" id="2_h2qja"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3kf7d"]
 size = Vector2(28, 21)
@@ -22,10 +22,11 @@ rotation = -0.523599
 [node name="TerrainCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10.5)
 shape = SubResource("RectangleShape2D_3kf7d")
+disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -16)
-texture = ExtResource("2_ogc3x")
+position = Vector2(0, -8)
+texture = ExtResource("2_h2qja")
 flip_h = true
 
 [node name="Area2D" type="Area2D" parent="."]

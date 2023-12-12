@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://q3mxvb2j0k4q"]
 
-[ext_resource type="Texture2D" uid="uid://duugsuhdoxr1l" path="res://Art/Deck Chair.png" id="1_fadyx"]
 [ext_resource type="Script" path="res://Scripts/bounce_chair.gd" id="1_i8ilh"]
+[ext_resource type="Texture2D" uid="uid://dks7jdakwscnw" path="res://Art/Smaller Chair.png" id="2_5n0wy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3kf7d"]
 size = Vector2(28, 21)
@@ -27,8 +27,8 @@ shape = SubResource("RectangleShape2D_3kf7d")
 disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -16)
-texture = ExtResource("1_fadyx")
+position = Vector2(0, -8)
+texture = ExtResource("2_5n0wy")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -16)
