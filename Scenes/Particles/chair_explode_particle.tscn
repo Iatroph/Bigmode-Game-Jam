@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2ic2qm7om8b7"]
+
+[ext_resource type="Texture2D" uid="uid://u2m5j6js2tv2" path="res://Art/Folded Chair.png" id="1_4alxr"]
+
+[sub_resource type="Gradient" id="Gradient_kfbly"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_3mf3g"]
+resource_name = "PlayOnAwake"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_kaedx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rhd0i"]
+_data = {
+"PlayOnAwake": SubResource("Animation_3mf3g"),
+"RESET": SubResource("Animation_kaedx")
+}
+
+[node name="chair_explode_particle" type="CPUParticles2D"]
+z_index = 5
+emitting = false
+amount = 1
+lifetime = 1.5
+one_shot = true
+texture = ExtResource("1_4alxr")
+direction = Vector2(0, -180)
+spread = 10.0
+initial_velocity_min = 191.92
+initial_velocity_max = 252.52
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+scale_amount_min = 0.6
+scale_amount_max = 0.6
+color_ramp = SubResource("Gradient_kfbly")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rhd0i")
+}
+autoplay = "PlayOnAwake"

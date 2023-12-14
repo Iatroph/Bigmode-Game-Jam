@@ -38,6 +38,7 @@ var can_throw : bool = true
 
 var max_chairs = 4
 var cur_chairs = 0
+var chairs_held = 4
 
 func _physics_process(delta):
 	#Apply gravity when not grounded
@@ -91,6 +92,7 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("R"):
 		cur_chairs = 0
+		chairs_held = 4
 		Global.destroy_all_chairs()
 	
 	if Input.is_action_just_pressed("F"):
@@ -132,6 +134,7 @@ func animation_handler():
 
 func throw_chair():
 	cur_chairs += 1
+	chairs_held -= 1
 	var instance = throwing_chair.instantiate()
 	instance.position = position
 	#instance.position = get_global_mouse_position()
@@ -150,7 +153,7 @@ func flip():
 		sprite.flip_h = true
 
 func apply_bounce(dir, pos):
-	if !is_on_floor() && velocity.y > 0:
+	if !is_on_floor(): #&& velocity.y > 0:
 		#print(bounces)
 		position = pos
 		velocity = Vector2.ZERO

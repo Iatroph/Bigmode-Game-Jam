@@ -1,0 +1,174 @@
+[gd_scene load_steps=17 format=3 uid="uid://cvje34ya7rw8p"]
+
+[ext_resource type="FontFile" uid="uid://wo10rikibjc2" path="res://Fonts/Plain Black.ttf" id="1_1plas"]
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_a3urx"]
+[ext_resource type="Texture2D" uid="uid://cq3qfp8q7qqeb" path="res://Art/King Sit Sheet.png" id="2_snt0k"]
+[ext_resource type="FontFile" uid="uid://diqsvirywaqjs" path="res://Fonts/Pixel12x10-v1.1.0.ttf" id="2_xkroc"]
+[ext_resource type="PackedScene" uid="uid://dcohyg0y40gma" path="res://Scenes/world.tscn" id="2_yuy61"]
+[ext_resource type="Theme" uid="uid://i83aoy3u00am" path="res://Themes/button.tres" id="4_b7upo"]
+
+[sub_resource type="FontVariation" id="FontVariation_n3vtk"]
+base_font = ExtResource("1_1plas")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_53jgo"]
+bg_color = Color(0.203922, 0.203922, 0.203922, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_wyekg"]
+base_font = ExtResource("2_xkroc")
+
+[sub_resource type="FontVariation" id="FontVariation_jo5b0"]
+base_font = ExtResource("1_1plas")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_brw08"]
+atlas = ExtResource("2_snt0k")
+region = Rect2(0, 0, 19, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3visg"]
+atlas = ExtResource("2_snt0k")
+region = Rect2(19, 0, 19, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_up0aw"]
+atlas = ExtResource("2_snt0k")
+region = Rect2(38, 0, 19, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6ksvu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_brw08")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3visg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_up0aw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3visg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_brw08")
+}],
+"loop": false,
+"name": &"blink",
+"speed": 20.0
+}]
+
+[sub_resource type="Animation" id="Animation_6ejmg"]
+resource_name = "blink"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["blink"],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3wc5f"]
+_data = {
+"blink": SubResource("Animation_6ejmg")
+}
+
+[node name="main_menu" type="Node2D" node_paths=PackedStringArray("credits_panel")]
+script = ExtResource("1_a3urx")
+play_scene = ExtResource("2_yuy61")
+credits_panel = NodePath("CanvasLayer/Control/Panel")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_top = 8.0
+offset_right = 384.0
+offset_bottom = 104.0
+theme_override_fonts/font = SubResource("FontVariation_n3vtk")
+theme_override_font_sizes/font_size = 100
+text = "Bounce King"
+
+[node name="Play Button" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 144.0
+offset_right = 160.0
+offset_bottom = 184.0
+focus_mode = 0
+theme = ExtResource("4_b7upo")
+theme_type_variation = &"FlatButton"
+theme_override_font_sizes/font_size = 32
+text = "Play"
+alignment = 0
+
+[node name="Credits Button" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 192.0
+offset_right = 224.0
+offset_bottom = 224.0
+theme = ExtResource("4_b7upo")
+theme_override_font_sizes/font_size = 32
+text = "Credits"
+alignment = 0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 0
+offset_left = 56.0
+offset_top = 232.0
+offset_right = 232.0
+offset_bottom = 352.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_53jgo")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 282.0
+offset_bottom = 31.0
+theme_override_fonts/font = SubResource("FontVariation_wyekg")
+text = "Pixel12x10 Font
+By Corne2Plum3"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/Panel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 48.0
+offset_right = 282.0
+offset_bottom = 89.0
+theme_override_fonts/font = SubResource("FontVariation_jo5b0")
+text = "Black Family Font
+By Paul Lloyd"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(440, 272)
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_6ksvu")
+animation = &"blink"
+autoplay = "blink"
+frame = 4
+frame_progress = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_3wc5f")
+}
+autoplay = "blink"
+
+[connection signal="pressed" from="CanvasLayer/Control/Play Button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Credits Button" to="." method="_on_credits_button_pressed"]

@@ -1,13 +1,68 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3lirk3e6a41q"]
+[gd_scene load_steps=12 format=3 uid="uid://c3lirk3e6a41q"]
 
 [ext_resource type="Script" path="res://Scripts/bounce_chair.gd" id="1_myr7t"]
 [ext_resource type="Texture2D" uid="uid://dks7jdakwscnw" path="res://Art/Smaller Chair.png" id="2_h2qja"]
+[ext_resource type="Texture2D" uid="uid://wgqexk8snsu1" path="res://Art/Smaller Chair Sheet.png" id="2_plvym"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3kf7d"]
 size = Vector2(28, 21)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3b5cb"]
+atlas = ExtResource("2_plvym")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfqdw"]
+atlas = ExtResource("2_plvym")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6itx"]
+atlas = ExtResource("2_plvym")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbda4"]
+atlas = ExtResource("2_plvym")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xary"]
+atlas = ExtResource("2_h2qja")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_16bpx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3b5cb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfqdw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6itx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfqdw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3b5cb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbda4")
+}],
+"loop": false,
+"name": &"boing",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xary")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o3ixy"]
-size = Vector2(14, 15.5)
+size = Vector2(14, 12.75)
 
 [node name="Bounce_Chair Reverse" type="RigidBody2D" node_paths=PackedStringArray("dir")]
 collision_layer = 2
@@ -24,9 +79,10 @@ position = Vector2(0, -10.5)
 shape = SubResource("RectangleShape2D_3kf7d")
 disabled = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
-texture = ExtResource("2_h2qja")
+sprite_frames = SubResource("SpriteFrames_16bpx")
+autoplay = "default"
 flip_h = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -35,7 +91,7 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="BounceArea" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 8)
+position = Vector2(0, 9.375)
 shape = SubResource("RectangleShape2D_o3ixy")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
