@@ -8,6 +8,8 @@ var bounce_accel = 100
 @export var jump_strength = -250
 var move_direction
 
+var  can_move : bool = true
+
 var bounces = 0
 var bounce_strength = 500
 var bounce_strength_cur = 500
@@ -54,9 +56,10 @@ func _physics_process(delta):
 		velocity.y = 0
 		velocity.y = jump_strength
 	
-	velocity.y = clamp(velocity.y,-2000,500)
+	velocity.y = clamp(velocity.y,-2000,400)
 	#if !is_bouncing:
-	move_direction = Input.get_axis("Left","Right")
+	if can_move:
+		move_direction = Input.get_axis("Left","Right")
 	#move_direction = Vector2(Input.get_action_strength("Left"), Input.get_action_strength("Right"))
 	#print(move_direction)
 	#print(velocity)
@@ -153,10 +156,10 @@ func flip():
 		sprite.flip_h = true
 
 func apply_bounce(dir, pos):
-	if !is_on_floor(): #&& velocity.y > 0:
+	if !is_on_floor(): #|| is_bouncing: #&& velocity.y > 0:
 		#print(bounces)
-		position = pos
 		velocity = Vector2.ZERO
+		position = pos
 		is_bouncing = true
 		
 		match bounces:
@@ -173,6 +176,8 @@ func apply_bounce(dir, pos):
 				bounce_strength_cur = bounce_strength_cur * bounce_multiplier
 				velocity = dir * bounce_strength_cur
 			_:
-				velocity = dir * bounce_strength
+				bounces = 0
+				bounce_strength_cur = bounce_strength
+				velocity = dir * bounce_strength_cur
 		bounces += 1
-		print(bounce_strength_cur)
+		#print(bounce_strength_cur)

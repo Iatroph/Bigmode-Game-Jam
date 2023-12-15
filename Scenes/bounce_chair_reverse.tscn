@@ -61,12 +61,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o3ixy"]
-size = Vector2(14, 12.75)
+[sub_resource type="CircleShape2D" id="CircleShape2D_dqdcw"]
+radius = 11.0064
 
 [node name="Bounce_Chair Reverse" type="RigidBody2D" node_paths=PackedStringArray("dir")]
 collision_layer = 2
 freeze = true
+continuous_cd = 1
 script = ExtResource("1_myr7t")
 dir = NodePath("Direction")
 
@@ -92,6 +93,6 @@ collision_mask = 2
 
 [node name="BounceArea" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 9.375)
-shape = SubResource("RectangleShape2D_o3ixy")
+shape = SubResource("CircleShape2D_dqdcw")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
